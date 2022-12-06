@@ -1,0 +1,10 @@
+.square {
+	background-image: linear-gradient(75deg, var(--primary-color), var(--secondary-color));
+	padding: 3px;
+	height: 30px;
+	aspect-ratio: 1;
+	border-radius: 10px;
+	margin: 0 10px 0 5px;
+	color: white;
+	display: inline-block;
+}

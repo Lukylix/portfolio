@@ -1,0 +1,121 @@
+[
+	{
+		"name": "Dashboard",
+		"img": "dashboard.png",
+		"icons": ["React"],
+		"tags": ["socket.io", "chart.js", "Sass", "Backend"],
+		"links": {
+			"view": "#",
+			"github": {
+				"frontend": "https://github.com/Lukylix/client-dashboard",
+				"backend": "https://github.com/Lukylix/server-dashboard"
+			}
+		}
+	},
+	{
+		"name": "Portfolio",
+		"img": "portfolio.png",
+		"icons": ["Typescript", "Qwik"],
+		"tags": ["MDX", "Sass"],
+		"links": {
+			"view": "#",
+			"github": {
+				"frontend": "https://github.com/Lukylix/portfolio"
+			}
+		}
+	},
+	{
+		"name": "Kasa",
+		"img": "kasa.png",
+		"icons": ["React", "OpenClassRooms"],
+		"tags": ["Sass"],
+		"links": {
+			"view": "#",
+			"github": {
+				"frontend": "https://github.com/Lukylix/LucasGarcia_11_01032022"
+			}
+		}
+	},
+	{
+		"name": "SportSee",
+		"img": "sportsee.png",
+		"icons": ["React", "OpenClassRooms"],
+		"tags": ["Recharts", "Redux"],
+		"links": {
+			"view": "#",
+			"github": {
+				"frontend": "https://github.com/Lukylix/LucasGarcia_12_04032022"
+			}
+		}
+	},
+	{
+		"name": "Argent Bank",
+		"img": "argentbank.png",
+		"icons": ["Typescript", "React", "OpenClassRooms"],
+		"tags": ["Sass", "Redux", "Backend"],
+		"links": {
+			"view": "#",
+			"github": {
+				"frontend": "https://github.com/Lukylix/LucasGarcia_13_16052022",
+				"backend": "https://github.com/Lukylix/argentBank-api"
+			}
+		}
+	},
+	{
+		"name": "Ohmyfood",
+		"img": "ohmyfood.png",
+		"icons": ["OpenClassRooms"],
+		"tags": ["Sass"],
+		"links": {
+			"view": "#",
+			"github": {
+				"frontend": "https://github.com/Lukylix/LucasGarcia_3_02122021"
+			}
+		}
+	},
+	{
+		"name": "Booki",
+		"img": "booki.png",
+		"icons": ["OpenClassRooms"],
+		"tags": [],
+		"links": {
+			"view": "#"
+		}
+	},
+	{
+		"name": "Les Petits Plats",
+		"img": "lespetitsplats.png",
+		"icons": ["Javascript", "OpenClassRooms"],
+		"tags": [],
+		"links": {
+			"view": "#",
+			"github": {
+				"frontend": "https://github.com/Lukylix/LucasGarcia_7_21012022"
+			}
+		}
+	},
+	{
+		"name": "FishEye",
+		"img": "fisheye.png",
+		"icons": ["Javascript", "OpenClassRooms"],
+		"tags": [],
+		"links": {
+			"view": "#",
+			"github": {
+				"frontend": "https://github.com/Lukylix/LucasGarcia_6_01042222"
+			}
+		}
+	},
+	{
+		"name": "GameOn",
+		"img": "gameon.png",
+		"icons": ["Javascript", "OpenClassRooms"],
+		"tags": [],
+		"links": {
+			"view": "#",
+			"github": {
+				"frontend": "https://github.com/Lukylix/GameOn-website-FR"
+			}
+		}
+	}
+]

@@ -1,0 +1,112 @@
+#projects-section {
+	margin-top: 3rem;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	gap: 20px;
+	.other-project-container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		text-align: center;
+		padding: 0 2rem;
+		&.full-grid-column {
+			grid-column: 1 / -1;
+		}
+	}
+	figure {
+		background-color: var(--background-color);
+		border-radius: 10px;
+		box-shadow: 0px 0px 30px -20px var(--box-shadow-color);
+		> div {
+			border-radius: 10px 10px 0 0;
+			overflow: hidden;
+			img {
+				aspect-ratio: 2;
+			}
+		}
+		&:hover .link-container {
+			display: flex;
+			a {
+				animation: pointer-events-ignore-first 250ms step-end;
+				pointer-events: all;
+			}
+		}
+		.link-container {
+			display: none;
+			position: absolute;
+			justify-content: center;
+			align-items: center;
+			gap: 20px;
+			top: 0;
+			height: 100%;
+			width: 100%;
+			background-color: var(--blend-70);
+			backdrop-filter: blur(0.4rem);
+			word-break: keep-all;
+			a {
+				width: min-content;
+				pointer-events: none;
+				transition: pointer-events 2s step-end;
+				svg {
+					height: 50px;
+					left: 50%;
+					transform: translateX(-50%);
+				}
+			}
+		}
+		figcaption {
+			padding: 0.5rem;
+			.tag-container {
+				display: flex;
+				gap: 5px;
+				margin-top: 5px;
+				width: 100%;
+				flex-wrap: wrap;
+				.tag {
+					font-size: 0.8rem;
+					background-color: var(--background-color);
+					border-radius: 10px;
+					padding: 5px 5px;
+					border: 1px solid black;
+				}
+			}
+			h3 {
+				line-height: 30px;
+			}
+			.icons-container {
+				display: flex;
+				position: absolute;
+				right: 0.5rem;
+				top: 0.5rem;
+				height: 30px;
+				gap: 10px;
+				[tooltip] {
+					> * {
+						height: 100%;
+						width: 100%;
+					}
+				}
+			}
+		}
+	}
+}
+
+:root[data-theme="dark"] #projects-section figure figcaption .tag-container .tag {
+	border: 1px solid transparent;
+}
+
+@keyframes pointer-events-ignore-first {
+	from {
+		pointer-events: none;
+	}
+	to {
+		pointer-events: all;
+	}
+}
+
+@media (max-width: 375px) {
+	#projects-section {
+		grid-template-columns: 1fr;
+	}
+}
