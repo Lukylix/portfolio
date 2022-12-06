@@ -4,8 +4,10 @@
 	--primary-color-transparent-25: #ff822e40;
 	--secondary-color: #ea4747;
 	--body-background-color: #f6f6f6;
+	--body-background-color-inverted: #0e1217;
 	--background-color: #ffffff33;
 	--text-color: #000000cc;
+	--text-color-inverted: #ffffffcc;
 	--text-color-light: #18060699;
 	--box-shadow-color: black;
 	--main-max-width: 800px;
@@ -16,8 +18,10 @@
 :root[data-theme="dark"] {
 	color-scheme: dark;
 	--body-background-color: #0e1217;
+	--body-background-color-inverted: #f6f6f6;
 	--background-color: #ffffff0d;
 	--text-color: #ffffffcc;
+	--text-color-inverted: #000000cc;
 	--text-color-light: #ffffff99;
 	--theme-color: black;
 	--theme-inverted-color: white;
