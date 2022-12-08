@@ -1,0 +1,39 @@
+#skills-container {
+	$triangle-height: 80px;
+	$triangle-width: $triangle-height * 1.84;
+	$gap: 10px;
+	margin-bottom: $triangle-height;
+	padding: 0;
+	.grid-triangles {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, $triangle-width);
+		grid-template-rows: repeat(auto-fill, $triangle-height);
+		column-gap: $gap;
+		// border: 1px solid white;
+		row-gap: calc($gap * 3);
+		span {
+			position: absolute;
+			left: 50%;
+			top: 20%;
+			transform: translateX(-50%);
+			color: var(--text-color-inverted);
+			font-weight: bold;
+			z-index: 1;
+		}
+		&.top {
+			svg {
+				transform: rotate(180deg);
+			}
+		}
+		&.bottom {
+			position: absolute;
+			left: calc(($triangle-width / 2) + ($gap/2));
+			top: calc($gap * 2);
+			width: calc(100% - ($triangle-width / 2) - $gap / 2);
+			span {
+				top: auto;
+				bottom: calc(20% + 3px);
+			}
+		}
+	}
+}
