@@ -1,9 +1,11 @@
 import { component$, Slot } from "@builder.io/qwik";
+import { TrianglesLine } from "~/components/triangles-line/triangles-line";
 import Header from "../components/header/header";
 
 export default component$(() => {
 	return (
 		<>
+			<TrianglesLine height="140px" width="1246px" />
 			<Header />
 			<main>
 				<Slot />
