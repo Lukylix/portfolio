@@ -16,15 +16,38 @@
 		line-height: 0;
 		input[type="checkbox"] {
 			display: none;
-			&:checked + div {
+			&:checked + .card {
+				.card__inner {
+					transform: rotateY(-180deg);
+				}
+			}
+		}
+		.card {
+			overflow: hidden;
+			width: 100%;
+			aspect-ratio: 1.8421610547795;
+			.card__inner {
+				transition: transform 0.3s ease-in-out;
+				transform-style: preserve-3d;
+				width: 100%;
+				height: 100%;
+			}
+			&__front,
+			&__back {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				backface-visibility: hidden;
+			}
+			&__back {
 				color: var(--primary-color);
+				transform: rotateY(180deg);
 				span {
 					color: white;
 				}
 			}
-		}
-		div {
-			overflow: hidden;
 			label {
 				position: absolute;
 				height: 150%;

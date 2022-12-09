@@ -21,12 +21,16 @@ export const calcRows = (skills: string[], windowWidth: number) => {
 	};
 	type breakPointsKey = keyof typeof breakPointsTopRow;
 	const { default: defaultBreakPoint, ...restBreakPoints } = breakPointsTopRow;
-	const trianglesTop = Object.keys(restBreakPoints)
-		.sort((a, b) => Number(b) - Number(a))
-		.reduce(
-			(acc, breakPoint) => (windowWidth <= Number(breakPoint) ? breakPointsTopRow[breakPoint as breakPointsKey] : acc),
-			defaultBreakPoint
-		);
+	const trianglesTop =
+		windowWidth > 0
+			? Object.keys(restBreakPoints)
+					.sort((a, b) => Number(b) - Number(a))
+					.reduce(
+						(acc, breakPoint) =>
+							windowWidth <= Number(breakPoint) ? breakPointsTopRow[breakPoint as breakPointsKey] : acc,
+						defaultBreakPoint
+					)
+			: breakPointsTopRow.default;
 	const trianglesBottom = trianglesTop - 1;
 
 	const fullLines = Math.floor(skills.length / (trianglesTop + trianglesBottom));
@@ -91,8 +95,16 @@ export default component$(({ selectedSignal = { value: [] } }: { selectedSignal?
 			<>
 				<input type="checkbox" id={value} onChange$={(event) => onSelect(event, value)} />
 				<div class="card">
-					<Triangle />
-					<span>{value}</span>
+					<div class="card__inner">
+						<div class="card__front">
+							<Triangle />
+							<span>{value}</span>
+						</div>
+						<div class="card__back">
+							<Triangle />
+							<span>{value}</span>
+						</div>
+					</div>
 					<label for={value} />
 				</div>
 			</>
