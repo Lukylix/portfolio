@@ -1,5 +1,6 @@
-import { component$ } from "@builder.io/qwik";
+import { component$, useClientEffect$, useSignal } from "@builder.io/qwik";
 import { DocumentHead } from "@builder.io/qwik-city";
+import Skills from "~/components/skills/skills";
 import Projects from "../../components/projects/projects";
 
 export const head: DocumentHead = {
@@ -13,5 +14,12 @@ export const head: DocumentHead = {
 };
 
 export default component$(() => {
-	return <Projects />;
+	const selected = useSignal<any[]>([]);
+
+	return (
+		<>
+			<Skills selectedSignal={selected} />
+			<Projects selectedArraySignal={selected} />
+		</>
+	);
 });

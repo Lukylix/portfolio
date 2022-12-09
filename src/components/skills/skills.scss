@@ -1,24 +1,48 @@
 #skills-container {
 	$triangle-height: 80px;
 	$triangle-width: $triangle-height * 1.84;
-	$gap: 10px;
-	margin-bottom: $triangle-height;
-	padding: 0;
+	--triangles-gap: 6px;
+	--triangles-number-top: 7;
+	padding: 0 0 calc(var(--triangles-gap) * 2) 0;
+	margin-bottom: var(--triangles-gap);
+	font-size: 0.9rem;
 	.grid-triangles {
 		display: grid;
-		grid-template-columns: repeat(auto-fill, $triangle-width);
-		grid-template-rows: repeat(auto-fill, $triangle-height);
-		column-gap: $gap;
-		// border: 1px solid white;
-		row-gap: calc($gap * 3);
+		grid-template-columns: repeat(var(--triangles-number-top), 1fr);
+		grid-auto-rows: minmax(min-content, max-content);
+		column-gap: calc(var(--triangles-gap) * 2);
+		row-gap: calc(var(--triangles-gap) * 3);
+		align-items: end;
+		line-height: 0;
+		input[type="checkbox"] {
+			display: none;
+			&:checked + div {
+				color: var(--primary-color);
+				span {
+					color: white;
+				}
+			}
+		}
+		div {
+			overflow: hidden;
+			label {
+				position: absolute;
+				height: 150%;
+				aspect-ratio: 1;
+				bottom: 25%;
+				left: 50%;
+				transform: translateX(-50%) rotate(45deg);
+				z-index: 10;
+			}
+		}
 		span {
 			position: absolute;
 			left: 50%;
-			top: 20%;
+			top: 2px;
 			transform: translateX(-50%);
 			color: var(--text-color-inverted);
 			font-weight: bold;
-			z-index: 1;
+			line-height: normal;
 		}
 		&.top {
 			svg {
@@ -27,13 +51,45 @@
 		}
 		&.bottom {
 			position: absolute;
-			left: calc(($triangle-width / 2) + ($gap/2));
-			top: calc($gap * 2);
-			width: calc(100% - ($triangle-width / 2) - $gap / 2);
+			grid-template-columns: repeat(calc(var(--triangles-number-top) - 1), 1fr);
+			left: calc(
+				(100% - (var(--triangles-number-top) - 1) * var(--triangles-gap) * 2) / var(--triangles-number-top) / 2 +
+					var(--triangles-gap)
+			);
+			top: calc(var(--triangles-gap) * 2);
+			width: calc(
+				100% - (100% - (var(--triangles-number-top) - 1) * var(--triangles-gap) * 2) / var(--triangles-number-top) -
+					var(--triangles-gap) * 2
+			);
 			span {
 				top: auto;
-				bottom: calc(20% + 3px);
+				bottom: 5px;
+			}
+			label {
+				bottom: auto;
+				top: 25%;
 			}
 		}
+	}
+}
+
+@media (max-width: 768px) {
+	#skills-container {
+		--triangles-number-top: 4;
+		--triangles-gap: 10px;
+	}
+}
+
+@media (max-width: 425px) {
+	#skills-container {
+		--triangles-number-top: 3;
+		--triangles-gap: 6px;
+		font-size: 0.85rem;
+	}
+}
+
+@media (max-width: 375px) {
+	#skills-container {
+		font-size: 0.7rem;
 	}
 }

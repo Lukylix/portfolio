@@ -1,4 +1,4 @@
-import { component$, useStyles$ } from "@builder.io/qwik";
+import { component$, useWatch$, useSignal, useStyles$, Signal } from "@builder.io/qwik";
 import { ComputerLogo } from "../icons/computer";
 import { GithubLogo } from "../icons/github";
 import Icon, { IconNames } from "../icons/icon";
@@ -69,15 +69,34 @@ export const Project = component$(({ index, name, img, icons, tags, links: { vie
 	);
 });
 
-export default component$(() => {
+export default component$(({ selectedArraySignal }: { selectedArraySignal: Signal<string[]> }) => {
 	useStyles$(styles);
+	const filteredProject = useSignal(projects);
+
+	useWatch$(({ track }) => {
+		track(() => selectedArraySignal.value);
+		(() => {
+			if (selectedArraySignal.value.length === 0) return (filteredProject.value = projects);
+			filteredProject.value = projects.filter((project) => {
+				const valuesGrouped = [...project.icons, ...project.tags];
+				if (selectedArraySignal.value.reduce((acc, value) => acc && valuesGrouped.includes(value), true)) return true;
+				return false;
+			});
+		})();
+	});
+
 	return (
 		<section id="projects-section">
-			{projects.map((project, index) => (
+			{filteredProject.value.map((project, index) => (
 				<Project key={project.img} index={index} {...project} />
 			))}
-			<div class={`other-project-container ${projects.length % 2 === 0 ? "full-grid-column" : ""}`}>
-				<h3>Et d'autres projets entreprise ou particulier ...</h3>
+
+			<div class={`other-project-container ${filteredProject.value.length % 2 === 0 ? "full-grid-column" : ""}`}>
+				{filteredProject.value.length > 0 ? (
+					<h3>Et d'autres projets entreprise ou particulier ...</h3>
+				) : (
+					<h3>Aucun projet ne correspond à vos filtres ...</h3>
+				)}
 			</div>
 		</section>
 	);

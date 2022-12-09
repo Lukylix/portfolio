@@ -1,99 +1,119 @@
-import { $, component$, useClientEffect$, useOnWindow, useSignal, useStore, useStylesScoped$ } from "@builder.io/qwik";
+import {
+	$,
+	component$,
+	useStore,
+	useStylesScoped$,
+	Signal,
+	QwikChangeEvent,
+	useOnWindow,
+	useClientEffect$,
+} from "@builder.io/qwik";
 import { Triangle } from "../icons/triangle";
 
 import styles from "./skills.scss?inline";
 import projects from "../projects/projects.json";
 
-export default component$(() => {
+export const calcRows = (skills: string[], windowWidth: number) => {
+	const breakPointsTopRow = {
+		default: 7,
+		768: 4,
+		425: 3,
+	};
+	type breakPointsKey = keyof typeof breakPointsTopRow;
+	const { default: defaultBreakPoint, ...restBreakPoints } = breakPointsTopRow;
+	const trianglesTop = Object.keys(restBreakPoints)
+		.sort((a, b) => Number(b) - Number(a))
+		.reduce(
+			(acc, breakPoint) => (windowWidth <= Number(breakPoint) ? breakPointsTopRow[breakPoint as breakPointsKey] : acc),
+			defaultBreakPoint
+		);
+	const trianglesBottom = trianglesTop - 1;
+
+	const fullLines = Math.floor(skills.length / (trianglesTop + trianglesBottom));
+	const restLine = skills.length % (trianglesTop + trianglesBottom);
+	const restTop = restLine > 0 ? Math.ceil(restLine / 2) : 0;
+	const restBottom = restLine > 0 ? restLine - restTop : 0;
+
+	const skillsCopy = [...skills];
+	let rowsTop: string[] = [];
+	let rowsBottom: string[] = [];
+	for (let i = 0; i < fullLines; i++) {
+		rowsTop = [...rowsTop, ...skillsCopy.splice(0, trianglesTop)];
+		rowsBottom = [...rowsBottom, ...skillsCopy.splice(0, trianglesBottom)];
+	}
+	const ghostToAddTop = restTop > 0 ? Math.floor((trianglesTop - restTop) / 2) : 0;
+	rowsTop = [...rowsTop, ...Array(ghostToAddTop).fill("ghost")];
+	rowsTop = [...rowsTop, ...skillsCopy.splice(0, restTop)];
+	const ghostToAddBottom = restBottom > 0 ? Math.floor((trianglesBottom - restBottom) / 2) : 0;
+	rowsBottom = [...rowsBottom, ...Array(ghostToAddBottom).fill("ghost")];
+	rowsBottom = [...rowsBottom, ...skillsCopy.splice(0, restBottom)];
+
+	return { rowsTop, rowsBottom };
+};
+
+export const getSkillsFromProjects = (projects: any) => {
+	let skills: string[] = [];
+	for (const project of projects) {
+		skills = [...skills, ...project.tags, ...project.icons];
+	}
+	const skillsToRemove = ["Backend", "Javascript", "OpenClassRooms"];
+	return [...new Set(skills)].filter((skill) => !skillsToRemove.includes(skill));
+};
+
+export default component$(({ selectedSignal = { value: [] } }: { selectedSignal?: Signal<string[]> }) => {
 	useStylesScoped$(styles);
-	const triangle = {
-		gap: 10,
-		height: 80,
-		width: 80 * 1.84,
-	};
 
-	const getSkillsFromProjects = (projects: any) => {
-		let skills: string[] = [];
-		for (const project of projects) {
-			skills = [...skills, ...project.tags, ...project.icons];
-		}
-		const skillsToRemove = ["Backend", "Javascript", "OpenClassRooms"];
-		return [...new Set(skills)].filter((skill) => !skillsToRemove.includes(skill));
-	};
+	const store = useStore({
+		skills: getSkillsFromProjects(projects),
+		windowWidth: 0,
+	});
 
-	const skillsContainerRef = useSignal<any>();
-	const store = useStore({ containerWidth: 0, skills: getSkillsFromProjects(projects) });
-
-	let currentCalcWidth = 0;
-	let maxTrianglesPerRowTop = 0;
-	let maxTrianglesPerRowBottom = 0;
-	while (currentCalcWidth <= store.containerWidth) {
-		currentCalcWidth += triangle.width;
-		if (currentCalcWidth <= store.containerWidth) {
-			if (currentCalcWidth + (triangle.width / 2 + triangle.gap / 2) <= store.containerWidth)
-				maxTrianglesPerRowBottom++;
-			currentCalcWidth += triangle.gap;
-			maxTrianglesPerRowTop++;
-		}
-	}
-
-	let numbersOfSkills = store.skills.length;
-	let numberRowTop = Math.ceil(numbersOfSkills / 2);
-	let numberRowBottom = Math.floor(numbersOfSkills / 2);
-	if (maxTrianglesPerRowTop + maxTrianglesPerRowBottom <= numbersOfSkills && store.containerWidth > 0) {
-		numberRowTop = 0;
-		numberRowBottom = 0;
-		while (numbersOfSkills > 0) {
-			if (numbersOfSkills >= maxTrianglesPerRowTop) {
-				numbersOfSkills -= maxTrianglesPerRowTop;
-				numberRowTop += maxTrianglesPerRowTop;
-			} else {
-				numberRowTop += numbersOfSkills;
-				numbersOfSkills = 0;
-			}
-			if (numbersOfSkills >= maxTrianglesPerRowBottom) {
-				numbersOfSkills -= maxTrianglesPerRowBottom;
-				numberRowBottom += maxTrianglesPerRowBottom;
-			} else {
-				numberRowBottom += numbersOfSkills;
-				numbersOfSkills = 0;
-			}
-		}
-	}
-	const trianglesTopGridArray = Array(numberRowTop)
-		.fill(0)
-		.map((val, i) => store.skills[i]);
-	const trianglesBottomGridArray = Array(numberRowBottom)
-		.fill(0)
-		.map((val, i) => store.skills[i + numberRowTop]);
+	const { rowsTop, rowsBottom } = calcRows(store.skills, store.windowWidth);
 
 	useOnWindow(
 		"resize",
 		$(() => {
-			store.containerWidth = skillsContainerRef.value.clientWidth;
+			store.windowWidth = window.outerWidth;
 		})
 	);
+
 	useClientEffect$(() => {
-		store.containerWidth = skillsContainerRef.value.clientWidth;
+		store.windowWidth = window.outerWidth;
 	});
+
+	const onSelect = $((event: QwikChangeEvent<HTMLInputElement>, value: string) => {
+		if (event.target.checked) return (selectedSignal.value = [...selectedSignal.value, value]);
+		selectedSignal.value = selectedSignal.value.filter((val) => val !== value);
+	});
+
+	const TriangleSelect = ({ value }: { value: string }) => {
+		return (
+			<>
+				<input type="checkbox" id={value} onChange$={(event) => onSelect(event, value)} />
+				<div class="card">
+					<Triangle />
+					<span>{value}</span>
+					<label for={value} />
+				</div>
+			</>
+		);
+	};
+
 	return (
-		<section id="skills-container" ref={skillsContainerRef}>
-			<div class="grid-triangles top">
-				{trianglesTopGridArray.map((val) => (
-					<div key={val}>
-						<span>{val}</span>
-						<Triangle />
-					</div>
-				))}
-			</div>
-			<div class="grid-triangles bottom">
-				{trianglesBottomGridArray.map((val) => (
-					<div key={val}>
-						<span>{val}</span>
-						<Triangle />
-					</div>
-				))}
-			</div>
-		</section>
+		<>
+			<h2>Filtrer :</h2>
+			<section id="skills-container">
+				<div class="grid-triangles top">
+					{rowsTop.map((value) => (
+						<>{value === "ghost" ? <div></div> : <TriangleSelect value={value} />}</>
+					))}
+				</div>
+				<div class="grid-triangles bottom">
+					{rowsBottom.map((value) => (
+						<>{value === "ghost" ? <div></div> : <TriangleSelect value={value} />}</>
+					))}
+				</div>
+			</section>
+		</>
 	);
 });
