@@ -1,4 +1,4 @@
-import { component$, useWatch$, useSignal, useStyles$, Signal } from "@builder.io/qwik";
+import { component$, useTask$, useSignal, useStyles$, Signal } from "@builder.io/qwik";
 import { ComputerLogo } from "../icons/computer";
 import { GithubLogo } from "../icons/github";
 import Icon, { IconNames } from "../icons/icon";
@@ -13,7 +13,7 @@ interface ProjectProps {
 	icons: IconNames[];
 	tags: string[];
 	links: {
-		view: string;
+		view?: string;
 		github?: {
 			frontend: string;
 			backend?: string;
@@ -34,7 +34,7 @@ export const Project = component$(({ index, name, img, icons, tags, links: { vie
 						</a>
 					)}
 					{view && (
-						<a href={view}>
+						<a href={view} target="_blank">
 							<ComputerLogo />
 							Visiter
 						</a>
@@ -73,7 +73,7 @@ export default component$(({ selectedArraySignal }: { selectedArraySignal: Signa
 	useStyles$(styles);
 	const filteredProject = useSignal(projects);
 
-	useWatch$(({ track }) => {
+	useTask$(({ track }) => {
 		track(() => selectedArraySignal.value);
 		(() => {
 			if (selectedArraySignal.value.length === 0) return (filteredProject.value = projects);

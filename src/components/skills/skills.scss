@@ -6,6 +6,7 @@
 	padding: 0 0 calc(var(--triangles-gap) * 2) 0;
 	margin-bottom: var(--triangles-gap);
 	font-size: 0.9rem;
+	color: var(--body-background-color-inverted);
 	.grid-triangles {
 		display: grid;
 		grid-template-columns: repeat(var(--triangles-number-top), 1fr);
@@ -56,6 +57,7 @@
 				left: 50%;
 				transform: translateX(-50%) rotate(45deg);
 				z-index: 10;
+				cursor: pointer;
 			}
 		}
 		span {
@@ -99,7 +101,7 @@
 @media (max-width: 768px) {
 	#skills-container {
 		--triangles-number-top: 4;
-		--triangles-gap: 10px;
+		--triangles-gap: 8px;
 	}
 }
 

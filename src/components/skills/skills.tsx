@@ -81,9 +81,12 @@ export default component$(({ selectedSignal = { value: [] } }: { selectedSignal?
 		})
 	);
 
-	useClientEffect$(() => {
-		store.windowWidth = window.outerWidth;
-	});
+	useClientEffect$(
+		() => {
+			store.windowWidth = window.outerWidth;
+		},
+		{ eagerness: "load" }
+	);
 
 	const onSelect = $((event: QwikChangeEvent<HTMLInputElement>, value: string) => {
 		if (event.target.checked) return (selectedSignal.value = [...selectedSignal.value, value]);

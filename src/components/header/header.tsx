@@ -19,20 +19,20 @@ export default component$(() => {
 				<ThemeToggle />
 				<ul>
 					<li>
-						<a href="/projects">
+						<Link href="/projects">
 							<Square>
 								<ComputerLogo />
 							</Square>
 							Projets
-						</a>
+						</Link>
 					</li>
 					<li>
-						<a href="/articles">
+						<Link href="/articles">
 							<Square>
 								<ArticleLogo />
 							</Square>
 							Articles
-						</a>
+						</Link>
 					</li>
 				</ul>
 			</nav>

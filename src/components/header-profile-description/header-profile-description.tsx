@@ -7,6 +7,7 @@ import { Profile } from "../profile/profile";
 
 import styles from "./header-profile-description.scss?inline";
 import { LinkedinLogo } from "../icons/linkedin";
+import { Link } from "@builder.io/qwik-city";
 
 export const HeaderProfileDescription = component$(() => {
 	useStylesScoped$(styles);
@@ -26,18 +27,18 @@ export const HeaderProfileDescription = component$(() => {
 				vous permettra d'avoir un aperçu de mes compétences.
 			</p>
 
-			<a href="#">
+			<Link href="/projects">
 				Projets
 				<Square>
 					<ComputerLogo />
 				</Square>
-			</a>
-			<a href="#">
+			</Link>
+			<Link href="/articles">
 				Articles
 				<Square>
 					<ArticleLogo />
 				</Square>
-			</a>
+			</Link>
 			<a href="https://github.com/Lukylix" target="_blank">
 				Github
 				<Square>

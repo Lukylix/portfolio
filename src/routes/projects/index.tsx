@@ -1,4 +1,4 @@
-import { component$, useClientEffect$, useSignal } from "@builder.io/qwik";
+import { component$, useSignal } from "@builder.io/qwik";
 import { DocumentHead } from "@builder.io/qwik-city";
 import Skills from "~/components/skills/skills";
 import Projects from "../../components/projects/projects";
