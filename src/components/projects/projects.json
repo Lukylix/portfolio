@@ -129,17 +129,5 @@
 				"frontend": "https://github.com/Lukylix/LucasGarcia_6_01042222"
 			}
 		}
-	},
-	{
-		"name": "GameOn",
-		"img": "gameon.png",
-		"icons": ["Javascript", "OpenClassRooms"],
-		"tags": ["Vanilla"],
-		"links": {
-			"view": "https://gameon.iloa.dev/",
-			"github": {
-				"frontend": "https://github.com/Lukylix/GameOn-website-FR"
-			}
-		}
 	}
 ]
