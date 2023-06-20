@@ -1,4 +1,4 @@
-import { component$, useClientEffect$, useStore, useStyles$ } from "@builder.io/qwik";
+import { component$, useVisibleTask$, useStore, useStyles$ } from "@builder.io/qwik";
 import { Triangle } from "../icons/triangle";
 
 import styles from "./triangles-line.scss?inline";
@@ -27,7 +27,7 @@ export const TrianglesLine = component$(({ height, width }: TrianglesLineProps) 
 
 	const state: { triangles: any[] } = useStore({ triangles: [] });
 
-	useClientEffect$(
+	useVisibleTask$(
 		() => {
 			const randomInteger = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min;
 			const intWidth = Number(width.replace(/px$/, ""));
@@ -100,7 +100,7 @@ export const TrianglesLine = component$(({ height, width }: TrianglesLineProps) 
 			}
 			state.triangles = trianglesToRender;
 		},
-		{ eagerness: "load" }
+		{ strategy: 'document-ready' }
 	);
 
 	return (

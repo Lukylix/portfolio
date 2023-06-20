@@ -1,4 +1,4 @@
-export const GithubLogo = ({ props }: { props?: any }) => (
+export const GithubLogo = (props : any ) => (
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		xmlns:xlink="http://www.w3.org/1999/xlink"

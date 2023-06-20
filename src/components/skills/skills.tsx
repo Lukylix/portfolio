@@ -6,7 +6,7 @@ import {
 	Signal,
 	QwikChangeEvent,
 	useOnWindow,
-	useClientEffect$,
+	useVisibleTask$,
 } from "@builder.io/qwik";
 import { Triangle } from "../icons/triangle";
 
@@ -81,11 +81,11 @@ export default component$(({ selectedSignal = { value: [] } }: { selectedSignal?
 		})
 	);
 
-	useClientEffect$(
+	useVisibleTask$(
 		() => {
 			store.windowWidth = window.outerWidth;
 		},
-		{ eagerness: "load" }
+		{ strategy: 'document-ready' }
 	);
 
 	const onSelect = $((event: QwikChangeEvent<HTMLInputElement>, value: string) => {

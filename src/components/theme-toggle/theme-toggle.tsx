@@ -1,4 +1,4 @@
-import { $, component$, useClientEffect$, useContext, useStyles$ } from "@builder.io/qwik";
+import { $, component$, useVisibleTask$, useContext, useStyles$ } from "@builder.io/qwik";
 import { themeStorageKey } from "../router-head/theme-script";
 import themeToggle from "./theme-toggle.css?inline";
 import { GlobalStore } from "../../context";
@@ -40,7 +40,7 @@ export const ThemeToggle = component$(() => {
 		setPreference(store.theme);
 	});
 
-	useClientEffect$(() => {
+	useVisibleTask$(() => {
 		store.theme = getColorPreference();
 	});
 	return (

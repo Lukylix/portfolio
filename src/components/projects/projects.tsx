@@ -1,4 +1,5 @@
-import { component$, useTask$, useSignal, useStyles$, Signal } from "@builder.io/qwik";
+import { component$, useTask$, useSignal, useStyles$, Signal, useContext } from "@builder.io/qwik";
+import { GlobalStore } from "../../context";
 import { ComputerLogo } from "../icons/computer";
 import { GithubLogo } from "../icons/github";
 import Icon, { IconNames } from "../icons/icon";
@@ -22,6 +23,8 @@ interface ProjectProps {
 }
 
 export const Project = component$(({ index, name, img, icons, tags, links: { view, github } }: ProjectProps) => {
+  const store = useContext(GlobalStore);
+
 	return (
 		<figure>
 			<div>
@@ -57,12 +60,21 @@ export const Project = component$(({ index, name, img, icons, tags, links: { vie
 					))}
 				</div>
 				<div class="icons-container">
-					{icons.map((icon) => (
-						//@ts-ignore tooltip
+					{icons.map((icon) => { 
+            let fill ;
+            const theme = store.theme;
+            if (icon === "Electron") {
+            if (theme === "light") fill = "#000000";
+            if (theme === "dark" ||theme === "auto")  fill = "#ffffff" ;
+        
+            }
+            let fillProps= {}
+            if (fill) fillProps = {fill}
+            return (
+              //@ts-ignore tooltip
 						<div tooltip={icon}>
-							<Icon key={icon} name={icon} />
-						</div>
-					))}
+							<Icon key={icon} name={icon}  {...fillProps} />
+						</div>)})}
 				</div>
 			</figcaption>
 		</figure>

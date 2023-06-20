@@ -1,6 +1,5 @@
 import { component$, useStylesScoped$ } from "@builder.io/qwik";
 import { Square } from "../square/square";
-import { ArticleLogo } from "../icons/article";
 import { ComputerLogo } from "../icons/computer";
 import { GithubLogo } from "../icons/github";
 import { Profile } from "../profile/profile";
@@ -23,7 +22,7 @@ export const HeaderProfileDescription = component$(() => {
 			<p>
 				Bienvenue sur mon portfolio.
 				<br />
-				Je vous invite à parcourir mes divers projets et articles tous centrés sur le développement bien entendu ! Cela
+				Je vous invite à parcourir mes divers projets tous centrés sur le développement bien entendu ! Cela
 				vous permettra d'avoir un aperçu de mes compétences.
 			</p>
 
@@ -33,12 +32,12 @@ export const HeaderProfileDescription = component$(() => {
 					<ComputerLogo />
 				</Square>
 			</Link>
-			<Link href="/articles">
+			{/* <Link href="/articles">
 				Articles
 				<Square>
 					<ArticleLogo />
 				</Square>
-			</Link>
+			</Link> */}
 			<a href="https://github.com/Lukylix" target="_blank">
 				Github
 				<Square>

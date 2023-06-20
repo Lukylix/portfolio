@@ -11,7 +11,6 @@ header {
 	backdrop-filter: blur(0.4rem);
 	width: calc(100% - 20px);
 	max-width: var(--main-max-width);
-	position: fixed;
 	left: 50%;
 	transform: translateX(-50%);
 	nav {
@@ -30,7 +29,7 @@ header {
 			li {
 				display: inline-block;
 				margin: 0;
-				padding: 0;
+				padding: 0 10px 0 0;
 				a {
 					display: inline-block;
 					padding: 15px 5px;

@@ -8,6 +8,7 @@ import { QwikLogo } from "./qwik";
 import { ReactLogo } from "./react";
 import { JavascriptLogo } from "./javascript";
 import { TypescriptLogo } from "./typescript";
+import { ElectronLogo } from "./electron";
 import { JSX } from "@builder.io/qwik/jsx-runtime";
 
 export type IconNames =
@@ -19,14 +20,16 @@ export type IconNames =
 	| "OpenClassRooms"
 	| "Qwik"
 	| "React"
+  | "Electron"
 	| string;
 
 interface IconProps {
 	name: IconNames;
+  fill?: string;
 }
 
 export default component$(({ name, ...props }: IconProps) => {
-	const logosDictionary: { [key: string]: ({ ...props }: { props?: any }) => JSX.Element } = {
+	const logosDictionary: { [key: string]: (props: any) => JSX.Element } = {
 		Article: ArticleLogo,
 		Computer: ComputerLogo,
 		Github: GithubLogo,
@@ -35,7 +38,9 @@ export default component$(({ name, ...props }: IconProps) => {
 		React: ReactLogo,
 		Javascript: JavascriptLogo,
 		Typescript: TypescriptLogo,
+    Electron: ElectronLogo,
 	};
 	const IconTag = logosDictionary[name];
-	return <>{IconTag && <IconTag {...props} />}</>;
+  console.log(props);
+	return <>{IconTag && <IconTag {...props} name="plop" />}</>;
 });

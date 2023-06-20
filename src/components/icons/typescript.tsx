@@ -1,4 +1,4 @@
-export const TypescriptLogo = ({ props }: { props?: any }) => (
+export const TypescriptLogo = (props : any ) => (
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		xmlns:xlink="http://www.w3.org/1999/xlink"

@@ -1,4 +1,4 @@
-export const OpenClassRoomsLogo = ({ props }: { props?: any }) => (
+export const OpenClassRoomsLogo = (props : any ) => (
 	<svg
 		viewBox="0 0 13.30818 13.308179"
 		version="1.1"

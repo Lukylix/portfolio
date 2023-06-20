@@ -1,5 +1,27 @@
 [
 	{
+		"name": "Igni",
+		"img": "igni.png",
+		"icons": ["React", "Electron"],
+		"tags": [],
+		"links": {
+			"github": {
+				"frontend": "https://github.com/Lukylix/igni"
+			}
+		}
+	},
+	{
+		"name": "Chrolog",
+		"img": "chrolog.png",
+		"icons": ["React", "Electron"],
+		"tags": ["Redux"],
+		"links": {
+			"github": {
+				"frontend": "https://github.com/Lukylix/chrolog"
+			}
+		}
+	},
+	{
 		"name": "Dashboard",
 		"img": "dashboard.png",
 		"icons": ["React"],
@@ -51,7 +73,7 @@
 		"name": "Argent Bank",
 		"img": "argentbank.png",
 		"icons": ["Typescript", "React", "OpenClassRooms"],
-		"tags": ["Sass", "Redux", "Backend", "Express", "MongoDB", "Mongoose"],
+		"tags": ["Sass", "Redux", "Backend", "Express", "Mongoose"],
 		"links": {
 			"view": "https://argentbank.iloa.dev/",
 			"github": {

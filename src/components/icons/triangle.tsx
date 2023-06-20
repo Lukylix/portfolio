@@ -1,4 +1,4 @@
-export const Triangle = (props: any) => (
+export const Triangle = (props : any ) => (
 	<svg
 		viewBox="0 0 15.464868 8.3949598"
 		version="1.1"
