@@ -41,6 +41,5 @@ export default component$(({ name, ...props }: IconProps) => {
     Electron: ElectronLogo,
 	};
 	const IconTag = logosDictionary[name];
-  console.log(props);
 	return <>{IconTag && <IconTag {...props} name="plop" />}</>;
 });
