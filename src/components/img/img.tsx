@@ -8,11 +8,10 @@ export const Img = component$(({ src, alt, ...props }: any) => {
 	const isLoaded = useStore({ value: false });
 	const handleImageLoad = $((e: any) => {
 		const img = e.target;
-		const srcImg = img.src;
-		console.log(srcImg, src);
+		const srcImg = img?.src;
+		if (!srcImg) return;
 		if (srcImg !== src) return;
 		isLoaded.value = true;
-		console.log(src, "loaded");
 	});
 
 	useVisibleTask$(() => {

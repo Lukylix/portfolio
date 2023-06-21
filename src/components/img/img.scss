@@ -1,4 +1,37 @@
 .blurred-img {
-  background-repeat: no-repeat;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.blurred-img::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #0E1217;
+	background-image: radial-gradient(at 50% 23%, #3a3b3b 0px, transparent 50%),
+		radial-gradient(at 68% 30%, #292929 0px, transparent 50%),
+		radial-gradient(at 91% 62%, #0E1217 0px, transparent 50%),
+		radial-gradient(at 86% 81%, #474747 0px, transparent 50%),
+		radial-gradient(at 27% 5%, #0E1217 0px, transparent 50%),
+		radial-gradient(at 50% 62%, #0E1217 0px, transparent 50%),  
+		radial-gradient(at 27% 17%, #292828 0px, transparent 50%);  
+  z-index: -1;
+}
+.blurred-img::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: inherit;
   background-size: cover;
+  background-repeat: no-repeat;
+}
+
+img {
+  object-fit: cover;
 }
