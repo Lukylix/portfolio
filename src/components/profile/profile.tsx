@@ -5,7 +5,7 @@ export const Profile = component$(({ borderSize }: { borderSize?: "large" | unde
 	useStylesScoped$(profile);
 	return (
 		<div class={`gradient-border ${borderSize ? `gradient-border__${borderSize}` : ""}`}>
-			<img alt="Avatar" style={{ height: "100%"}} src="/profile160.png" />
+			<img alt="Avatar" style={{ height: "100%" }} loading="lazy" src="/profile160.png" />
 		</div>
 	);
 });

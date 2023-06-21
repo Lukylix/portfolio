@@ -6,6 +6,7 @@ import Icon, { IconNames } from "../icons/icon";
 
 import projects from "./projects.json";
 import styles from "./projects.scss?inline";
+import { Img } from "../img/img";
 
 interface ProjectProps {
 	index: number;
@@ -28,7 +29,7 @@ export const Project = component$(({ index, name, img, icons, tags, links: { vie
 	return (
 		<figure>
 			<div>
-				<img src={`/projects/${img}`} alt={name} loading={index > 1 ? "lazy" : "eager"} />
+				<Img src={`/projects/${img}`} alt={name} loading={index > 1 ? "lazy" : "eager"} />
 				<div class="link-container">
 					{github?.frontend && (
 						<a href={github.frontend} target="_blank">
