@@ -5,6 +5,7 @@ import Header from "../components/header/header";
 export default component$(() => {
 	return (
 		<>
+			<script defer data-domain="iloa.dev" src="https://plausible.iloa.dev/js/script.js"></script>
 			<TrianglesLine height="140px" width="1246px" />
 			<Header />
 			<main>
