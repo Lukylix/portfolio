@@ -87,3 +87,9 @@ Then visit [http://localhost:8080/](http://localhost:8080/)
 ```
 npm run build.server
 ```
+
+## Static Site Generator (Node.js)
+
+```
+npm run build.server
+```
